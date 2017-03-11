@@ -2,6 +2,8 @@
  * Created by Kaj Suiker on 10-3-2017.
  */
 
+import rest.CoffeeRest;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;

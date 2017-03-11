@@ -1,3 +1,8 @@
+package rest;
+
+import dao.TweetDAO;
+import domain.Tweet;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
