@@ -1,9 +1,7 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Kaj Suiker on 10-3-2017.
@@ -13,6 +11,13 @@ public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "tweet")
+    private List<Heart> hearts;
+
+    @ManyToMany
+    private List<Mention> mentions;
+
     private String message;
     private int text;
 
@@ -31,11 +36,35 @@ public class Tweet {
         this.id = id;
     }
 
+    public List<Heart> getHearts() {
+        return hearts;
+    }
+
+    public void setHearts(List<Heart> hearts) {
+        this.hearts = hearts;
+    }
+
+    public List<Mention> getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(List<Mention> mentions) {
+        this.mentions = mentions;
+    }
+
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String taste) {
-        this.message = taste;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getText() {
+        return text;
+    }
+
+    public void setText(int text) {
+        this.text = text;
     }
 }
