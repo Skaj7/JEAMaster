@@ -1,20 +1,28 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Kaj Suiker on 10-3-2017.
  */
 @Entity
+@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t")
 public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "tweet")
+    private List<Heart> hearts;
+
+    @ManyToMany
+    private List<Mention> mentions;
+
+    @ManyToOne
+    private User owner;
+
     private String message;
-    private int text;
 
     public Tweet(String mes){
         message = mes;
@@ -31,11 +39,35 @@ public class Tweet {
         this.id = id;
     }
 
+    public List<Heart> getHearts() {
+        return hearts;
+    }
+
+    public void setHearts(List<Heart> hearts) {
+        this.hearts = hearts;
+    }
+
+    public List<Mention> getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(List<Mention> mentions) {
+        this.mentions = mentions;
+    }
+
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String taste) {
-        this.message = taste;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

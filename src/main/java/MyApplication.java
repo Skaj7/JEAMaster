@@ -2,7 +2,7 @@
  * Created by Kaj Suiker on 10-3-2017.
  */
 
-import rest.CoffeeRest;
+import rest.TweetRest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -18,7 +18,7 @@ public class MyApplication extends Application{
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new HashSet<>();
         addRestResourceClasses(resources);
-        resources.add(CoffeeRest.class);
+        resources.add(TweetRest.class);
         // Add Jackson feature.
         resources.add(org.glassfish.jersey.jackson.JacksonFeature.class);
 
