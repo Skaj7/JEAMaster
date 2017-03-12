@@ -7,6 +7,7 @@ import java.util.List;
  * Created by Kaj Suiker on 10-3-2017.
  */
 @Entity
+@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t")
 public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,10 @@ public class Tweet {
     @ManyToMany
     private List<Mention> mentions;
 
+    @ManyToOne
+    private User owner;
+
     private String message;
-    private int text;
 
     public Tweet(String mes){
         message = mes;
@@ -60,11 +63,11 @@ public class Tweet {
         this.message = message;
     }
 
-    public int getText() {
-        return text;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setText(int text) {
-        this.text = text;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

@@ -19,6 +19,9 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Heart> hearts;
 
+    @OneToMany(mappedBy="owner")
+    private List<Tweet> tweets;
+
     private String username;
     private byte[] picture;
     private String bio;
@@ -126,5 +129,13 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public List<Tweet> getTweets() {
+        return tweets;
+    }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
     }
 }
