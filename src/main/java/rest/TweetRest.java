@@ -3,6 +3,7 @@ package rest;
 import dao.TweetDAO;
 import domain.Tweet;
 import domain.User;
+import service.TweetService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -21,14 +22,13 @@ import java.util.concurrent.SynchronousQueue;
 public class TweetRest {
 
     @Inject
-    TweetDAO tDAO;
+    TweetService tweetService;
 
     @GET
     @Produces("application/json")
     @Path("latest")
     public List<Tweet> getLatest(){
-        tDAO.Save(new Tweet("1"));
-        return tDAO.GetLatetsTweets(new ArrayList<User>(){{add(new User());}});
+        return tweetService.latestTweets(3);
     }
 
 }

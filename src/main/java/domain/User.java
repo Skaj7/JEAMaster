@@ -1,25 +1,30 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Kaj Suiker on 11-3-2017.
  */
 @Entity
+@NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique=true)
+    private String email;
+
     @ManyToMany
     private List<User> following;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "ownerHeart")
     private List<Heart> hearts;
 
-    @OneToMany(mappedBy="owner")
+    @OneToMany(mappedBy="ownerTweet")
     private List<Tweet> tweets;
 
     private String username;
@@ -28,19 +33,22 @@ public class User {
     private Double lat;
     private Double lng;
     private String site;
-    private String mail;
     private String password;
     private int role;
+    public Date createdAt;
+    public Date updatedAt;
 
     public User() {
     }
 
-    public Long getId() {
-        return id;
+    @PrePersist
+    void createdAt() {
+        this.createdAt = this.updatedAt = new Date();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = new Date();
     }
 
     public List<User> getFollowing() {
@@ -107,14 +115,6 @@ public class User {
         this.site = site;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -137,5 +137,21 @@ public class User {
 
     public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

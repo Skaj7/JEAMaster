@@ -5,6 +5,7 @@ import domain.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import java.util.*;
 
@@ -19,6 +20,10 @@ public class TweetDAO {
     EntityManager em;
 
     public TweetDAO(){
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
     public void Save(Tweet tweet){
@@ -38,12 +43,8 @@ public class TweetDAO {
         return em.find(Tweet.class, id);
     }
 
-    public List<Tweet> GetLatetsTweets(List<User> following){
-        return em.createNamedQuery("Tweet.all").setMaxResults(10).getResultList();
-    }
-
-    public int TweetCount(User user){
-        int count = 0;
-        return count;
+    public List<Tweet> GetLatestTweets(List<User> following){
+        List<Tweet> ass = em.createNamedQuery("Tweet.all").setParameter("following", following).getResultList();
+        return ass;
     }
 }

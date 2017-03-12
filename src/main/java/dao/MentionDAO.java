@@ -18,6 +18,10 @@ public class MentionDAO {
     public MentionDAO(){
     }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     public void Save(Mention mention){
         em.persist(mention);
     }

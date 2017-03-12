@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Kaj Suiker on 11-3-2017.
@@ -13,14 +14,25 @@ public class Heart {
     private long id;
 
     @ManyToOne
-    private User owner;
+    private User ownerHeart;
 
     @ManyToOne
-    private Tweet tweet;
+    private Tweet tweetHeart;
 
-    private Timestamp date;
+    public Date createdAt;
+    public Date updatedAt;
 
     public Heart() {
+    }
+
+    @PrePersist
+    void createdAt() {
+        this.createdAt = this.updatedAt = new Date();
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = new Date();
     }
 
     public long getId() {
@@ -31,27 +43,19 @@ public class Heart {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getOwnerHeart() {
+        return ownerHeart;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerHeart(User ownerHeart) {
+        this.ownerHeart = ownerHeart;
     }
 
-    public Tweet getTweet() {
-        return tweet;
+    public Tweet getTweetHeart() {
+        return tweetHeart;
     }
 
-    public void setTweet(Tweet tweet) {
-        this.tweet = tweet;
-    }
-
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setTweetHeart(Tweet tweetHeart) {
+        this.tweetHeart = tweetHeart;
     }
 }

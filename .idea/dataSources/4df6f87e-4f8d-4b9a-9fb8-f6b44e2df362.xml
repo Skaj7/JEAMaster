@@ -12,5 +12,282 @@
     <schema id="6" parent="1" name="sakila"/>
     <schema id="7" parent="1" name="sys"/>
     <schema id="8" parent="1" name="world"/>
+    <table id="9" parent="2" name="heart"/>
+    <table id="10" parent="2" name="mention"/>
+    <table id="11" parent="2" name="mention_tweet"/>
+    <table id="12" parent="2" name="tweet"/>
+    <table id="13" parent="2" name="tweet_mention"/>
+    <table id="14" parent="2" name="user"/>
+    <table id="15" parent="2" name="user_user"/>
+    <column id="16" parent="9" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="9" name="DATE">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="18" parent="9" name="OWNER_ID">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="19" parent="9" name="TWEET_ID">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="20" parent="9" name="OWNER_EMAIL">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="21" parent="9" name="CREATEDAT">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="22" parent="9" name="UPDATEDAT">
+      <Position>7</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <index id="23" parent="9" name="FK_HEART_OWNER_ID">
+      <ColNames>OWNER_ID</ColNames>
+    </index>
+    <index id="24" parent="9" name="FK_HEART_TWEET_ID">
+      <ColNames>TWEET_ID</ColNames>
+    </index>
+    <key id="25" parent="9" name="PRIMARY">
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="26" parent="9" name="FK_HEART_OWNER_ID">
+      <ColNames>OWNER_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="27" parent="9" name="FK_HEART_TWEET_ID">
+      <ColNames>TWEET_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>tweet</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="28" parent="10" name="NAME">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="10" name="COUNT">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="30" parent="10" name="PRIMARY">
+      <ColNames>NAME</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="31" parent="11" name="Mention_NAME">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="11" name="tweets_ID">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="33" parent="11" name="FK_MENTION_TWEET_tweets_ID">
+      <ColNames>tweets_ID</ColNames>
+    </index>
+    <key id="34" parent="11" name="PRIMARY">
+      <ColNames>Mention_NAME
+tweets_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="35" parent="11" name="FK_MENTION_TWEET_Mention_NAME">
+      <ColNames>Mention_NAME</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>mention</RefTableName>
+      <RefColNames>NAME</RefColNames>
+    </foreign-key>
+    <foreign-key id="36" parent="11" name="FK_MENTION_TWEET_tweets_ID">
+      <ColNames>tweets_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>tweet</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="37" parent="12" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="38" parent="12" name="MESSAGE">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="39" parent="12" name="TEXT">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="40" parent="12" name="OWNER_ID">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="41" parent="12" name="OWNER_EMAIL">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="42" parent="12" name="CREATEDAT">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="43" parent="12" name="UPDATEDAT">
+      <Position>7</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <index id="44" parent="12" name="FK_TWEET_OWNER_ID">
+      <ColNames>OWNER_ID</ColNames>
+    </index>
+    <key id="45" parent="12" name="PRIMARY">
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="46" parent="12" name="FK_TWEET_OWNER_ID">
+      <ColNames>OWNER_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="47" parent="13" name="Tweet_ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="13" name="mentions_NAME">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="49" parent="13" name="FK_TWEET_MENTION_mentions_NAME">
+      <ColNames>mentions_NAME</ColNames>
+    </index>
+    <key id="50" parent="13" name="PRIMARY">
+      <ColNames>Tweet_ID
+mentions_NAME</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="51" parent="13" name="FK_TWEET_MENTION_Tweet_ID">
+      <ColNames>Tweet_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>tweet</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="52" parent="13" name="FK_TWEET_MENTION_mentions_NAME">
+      <ColNames>mentions_NAME</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>mention</RefTableName>
+      <RefColNames>NAME</RefColNames>
+    </foreign-key>
+    <column id="53" parent="14" name="ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="54" parent="14" name="BIO">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="55" parent="14" name="LAT">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="56" parent="14" name="LNG">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="57" parent="14" name="MAIL">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="58" parent="14" name="PASSWORD">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="59" parent="14" name="POFIELPIC">
+      <Position>7</Position>
+      <DataType>longblob|0</DataType>
+    </column>
+    <column id="60" parent="14" name="SITE">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="61" parent="14" name="USERNAME">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="62" parent="14" name="PICTURE">
+      <Position>10</Position>
+      <DataType>longblob|0</DataType>
+    </column>
+    <column id="63" parent="14" name="ROLE">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="64" parent="14" name="EMAIL">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="14" name="CREATEDAT">
+      <Position>13</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="66" parent="14" name="UPDATEDAT">
+      <Position>14</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="67" parent="14" name="PRIMARY">
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="68" parent="15" name="User_ID">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="15" name="following_ID">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="15" name="User_EMAIL">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="15" name="following_EMAIL">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="72" parent="15" name="FK_USER_USER_following_ID">
+      <ColNames>following_ID</ColNames>
+    </index>
+    <key id="73" parent="15" name="PRIMARY">
+      <ColNames>User_ID
+following_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="74" parent="15" name="FK_USER_USER_User_ID">
+      <ColNames>User_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="75" parent="15" name="FK_USER_USER_following_ID">
+      <ColNames>following_ID</ColNames>
+      <RefSchemaName>fontys</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
