@@ -1,18 +1,16 @@
 package rest;
 
-import JSON.HeartJSON;
 import domain.Tweet;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import interceptor.InterceptorClass;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import service.TweetService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.json.JsonObject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import java.beans.Transient;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
@@ -27,9 +25,10 @@ public class TweetRest {
 
     @POST
     @Produces("application/json")
-    @Path("tweet")
-    public Tweet post(JsonObject in ){
-        Tweet tweet = tweetService.post(in.getString("message"), in.getInt("id"));
+    @Path("tweet/{userId}")
+    @Interceptors(InterceptorClass.class)
+    public Tweet post(@PathParam("userId") int id , String in){
+        Tweet tweet = tweetService.post(in, id);
         tweet.getOwnerTweet().setTweets(null);
         return tweet;
     }
@@ -37,49 +36,59 @@ public class TweetRest {
     @POST
     @Produces("application/json")
     @Path("heart")
-    public void heart(){
-        tweetService.heart(1,1);
+    public void heart(JsonObject in) throws JSONException {
+        tweetService.heart(in.getInt("userId"),in.getInt("tweetId"));
     }
 
     @POST
     @Produces("application/json")
     @Path("selfDelete")
-    public List<Tweet> selfDelete(){
-        return tweetService.selfDelete();
-    }
-
-    @POST
-    @Produces("application/json")
-    @Path("delete")
-    public List<Tweet> delete(){
-        return tweetService.delete();
+    public void selfDelete(JSONObject in) throws JSONException {
+        tweetService.selfDelete(in.getInt("tweetId"), in.getInt("userId"));
     }
 
     @POST
     @Produces("application/json")
     @Path("edit")
-    public List<Tweet> edit(){
-        return tweetService.edit();
+    public void edit(JSONObject in) throws JSONException {
+        tweetService.edit(in.getInt("tweetId"), in.getInt("userId"));
     }
 
     @GET
     @Produces("application/json")
-    @Path("timeline")
-    public List<Tweet> getTimeline(){
-        return tweetService.timeline(3);
+    @Path("timeline/{userId}")
+    public List<Tweet> getTimeline(@PathParam("userId") int id){
+        return tweetService.timeline(id);
     }
 
     @GET
     @Produces("application/json")
-    @Path("ownLatest")
-    public List<Tweet> getLatest(){
-        return tweetService.latest(3);
+    @Path("ownLatest/{userId}")
+    public List<Tweet> getLatest(@PathParam("userId") int id){
+        return tweetService.latest(id);
     }
+
+
+
+
+
+
+
+
+
+
 
     @GET
     @Produces("application/json")
     @Path("search")
-    public List<Tweet> getOwnLatest(){
+    public List<Tweet> getSearch(){
         return tweetService.search();
+    }
+
+    @POST
+    @Produces("application/json")
+    @Path("delete")
+    public void delete(){
+        tweetService.delete();
     }
 }

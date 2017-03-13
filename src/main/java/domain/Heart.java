@@ -11,6 +11,7 @@ import java.util.Date;
 public class Heart {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
@@ -19,20 +20,36 @@ public class Heart {
     @ManyToOne
     private Tweet tweetHeart;
 
-    public Date createdAt;
-    public Date updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Heart() {
     }
 
     @PrePersist
-    void createdAt() {
+    public void createdAt() {
         this.createdAt = this.updatedAt = new Date();
     }
 
     @PreUpdate
-    void updatedAt() {
+    public void updatedAt() {
         this.updatedAt = new Date();
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public long getId() {
