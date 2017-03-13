@@ -1,34 +1,47 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Kaj Suiker on 10-3-2017.
  */
 @Entity
-@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t")
+@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t WHERE t.ownerTweet IN :following")
 public class Tweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "tweet")
+    @OneToMany(mappedBy = "tweetHeart")
     private List<Heart> hearts;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="tweets")
     private List<Mention> mentions;
 
     @ManyToOne
-    private User owner;
+    private User ownerTweet;
 
     private String message;
+    public Date createdAt;
+    public Date updatedAt;
 
     public Tweet(String mes){
         message = mes;
     }
 
     public Tweet() {
+    }
+
+    @PrePersist
+    void createdAt() {
+        this.createdAt = this.updatedAt = new Date();
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = new Date();
     }
 
     public Long getId() {
@@ -63,11 +76,11 @@ public class Tweet {
         this.message = message;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getOwnerTweet() {
+        return ownerTweet;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerTweet(User ownerTweet) {
+        this.ownerTweet = ownerTweet;
     }
 }

@@ -5,6 +5,8 @@ import domain.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,32 +20,30 @@ public class UserDAO {
     EntityManager em;
 
     public UserDAO(){
+
     }
 
-    public void Save(User user){
-        em.persist(user);
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
-    public boolean Delete(User user){
+    public void Delete(User user){
         em.remove(user);
-        return true;
     }
 
     public void Edit(User user){
         em.merge(user);
     }
 
-    public User Find(long id){
-        return em.find(User.class, id);
-    }
-
-    public List<User> Following(User user){
-        List<User> following = new ArrayList<>();
-        return following;
+    public User Find(long userId){
+        return em.find(User.class, userId);
     }
 
     public List<User> Followers(User user){
-        List<User> followers = new ArrayList<>();
-        return followers;
+        return em.createNamedQuery("User.followers").setParameter("user", user).getResultList();
+    }
+
+    public void Save(User user){
+        em.persist(user);
     }
 }

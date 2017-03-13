@@ -7,6 +7,7 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 
 /**
  * Created by Kaj Suiker on 11-3-2017.
@@ -19,6 +20,10 @@ public class HeartDAO {
     public HeartDAO(){
     }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     public void Save(Heart heart){
         em.persist(heart);
     }
@@ -28,16 +33,7 @@ public class HeartDAO {
         return true;
     }
 
-    public void Edit(Heart heart){
-        em.merge(heart);
-    }
-
     public Heart Find(long id){
         return em.find(Heart.class, id);
-    }
-
-    public String GetDateTime(Heart heart){
-        String dateTime = DateTime.CURRENT_TIME;
-        return dateTime;
     }
 }
