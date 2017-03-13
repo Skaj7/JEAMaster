@@ -36,6 +36,7 @@ public class TweetDAOTest {
         tweetDAO.setEm(entityManager);
 
         tweet = new Tweet();
+        tweet.setId(1L);
     }
 
     @After
@@ -77,7 +78,7 @@ public class TweetDAOTest {
         }).when(entityManager).remove(any(Tweet.class));
 
         //test
-        tweetDAO.Save(test);
+        tweetDAO.Delete(test);
 
         //verify
         assertNotNull(test.getId());
@@ -97,7 +98,7 @@ public class TweetDAOTest {
         }).when(entityManager).merge(any(Tweet.class));
 
         //test
-        tweetDAO.Save(test);
+        tweetDAO.Edit(test);
 
         //verify
         assertNotNull(test.getId());
@@ -129,10 +130,10 @@ public class TweetDAOTest {
         when(query.getResultList()).thenReturn(dummyResult);
 
         //test
-        List<Tweet> result = tweetDAO.GetLatestTweets(new ArrayList<User>());
+        List<Tweet> result = tweetDAO.GetTimeLines(new ArrayList<User>());
 
         //verify
-        verify(entityManager).createNamedQuery("User.followers");
+        verify(entityManager).createNamedQuery("Tweet.all");
         verify(query).getResultList();
         assertSame(dummyResult, result);
     }

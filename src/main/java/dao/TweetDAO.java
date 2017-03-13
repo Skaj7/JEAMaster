@@ -43,8 +43,7 @@ public class TweetDAO {
         return em.find(Tweet.class, id);
     }
 
-    public List<Tweet> GetLatestTweets(List<User> following){
-        List<Tweet> ass = em.createNamedQuery("Tweet.all").setParameter("following", following).getResultList();
-        return ass;
+    public List<Tweet> GetTimeLines(List<User> following){
+        return em.createNamedQuery("Tweet.all").setParameter("following", following).getResultList();
     }
 }

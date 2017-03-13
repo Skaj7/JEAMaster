@@ -59,7 +59,7 @@ public class TweetService {
 
         List<User> following = user.getFollowing();
 
-        return tweetDAO.GetLatestTweets(following);
+        return tweetDAO.GetTimeLines(following);
     }
 
     public List<Tweet> search() {
