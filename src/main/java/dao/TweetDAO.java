@@ -46,4 +46,8 @@ public class TweetDAO {
     public List<Tweet> GetTimeLines(List<User> following){
         return em.createNamedQuery("Tweet.all").setParameter("following", following).getResultList();
     }
+
+    public List<Tweet> Latest(User user){
+        return em.createNamedQuery("Tweet.all").setParameter("following", user).getResultList();
+    }
 }

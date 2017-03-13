@@ -2,14 +2,17 @@ package rest;
 
 import JSON.HeartJSON;
 import domain.Tweet;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import service.TweetService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import java.beans.Transient;
 import java.util.List;
 
 /**
@@ -25,15 +28,17 @@ public class TweetRest {
     @POST
     @Produces("application/json")
     @Path("tweet")
-    public List<Tweet> post(){
-        return tweetService.post();
+    public Tweet post(JsonObject in ){
+        Tweet tweet = tweetService.post(in.getString("message"), in.getInt("id"));
+        tweet.getOwnerTweet().setTweets(null);
+        return tweet;
     }
 
     @POST
     @Produces("application/json")
     @Path("heart")
-    public List<Tweet> heart(final HeartJSON input){
-        return tweetService.heart();
+    public void heart(){
+        tweetService.heart(1,1);
     }
 
     @POST

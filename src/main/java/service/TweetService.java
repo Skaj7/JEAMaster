@@ -1,7 +1,9 @@
 package service;
 
+import dao.HeartDAO;
 import dao.TweetDAO;
 import dao.UserDAO;
+import domain.Heart;
 import domain.Tweet;
 import domain.User;
 
@@ -23,27 +25,53 @@ public class TweetService {
     @Inject
     UserDAO userDAO;
 
+    @Inject
+    HeartDAO heartDAO;
+
     public TweetService() {
     }
 
-    public List<Tweet> post() {
-        return null;
+    public Tweet post(String message, int userId) {
+        if (message == "")
+            throw new NullPointerException("Message not found");
+
+        User user = userDAO.Find(userId);
+
+        if (user == null)
+            throw new NullPointerException("User id not found");
+
+        Tweet tweet = new Tweet();
+        tweet.setMessage(message);
+        tweet.setOwnerTweet(user);
+        tweetDAO.Save(tweet);
+        return tweet;
     }
 
-    public List<Tweet> heart() {
-        return null;
+    public void heart(int userId, int tweetid) {
+        User user = userDAO.Find(userId);
+
+        if (user == null)
+            throw new NullPointerException("User id not found");
+
+        Tweet tweet = tweetDAO.Find(tweetid);
+
+        if (tweet == null)
+            throw new NullPointerException("tweet id not found");
+
+        Heart heart = new Heart();
+        heart.setOwnerHeart(user);
+        heart.setTweetHeart(tweet);
+
+        heartDAO.Save(heart);
     }
 
-    public List<Tweet> delete() {
-        return null;
-    }
+    public List<Tweet> latest(int userId) {
+        User user = userDAO.Find(userId);
 
-    public List<Tweet> edit() {
-        return null;
-    }
+        if (user == null)
+            throw new NullPointerException("User id not found");
 
-    public List<Tweet> latest(int i) {
-        return null;
+        return tweetDAO.Latest(user);
     }
 
     /**
@@ -67,6 +95,14 @@ public class TweetService {
     }
 
     public List<Tweet> selfDelete() {
+        return null;
+    }
+
+    public List<Tweet> delete() {
+        return null;
+    }
+
+    public List<Tweet> edit() {
         return null;
     }
 }
