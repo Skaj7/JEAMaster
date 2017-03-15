@@ -49,7 +49,7 @@ public class UserDAO {
 
     public boolean Find(String email) {
         List<User> users = em.createNamedQuery("User.email").setParameter("email", email).getResultList();
-        if (users.size() == 0){
+        if (users.isEmpty()){
             return false;
         }else {
             return true;
