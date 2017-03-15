@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Created by Kaj Suiker on 10-3-2017.
  *
- *
  */
 @Stateless
 @Path("tweet")
