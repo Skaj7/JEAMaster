@@ -1,5 +1,4 @@
 FROM ubuntu
-MAINTAINER Rafael Pestano &amp;lt;rmpestano@gmail.com&amp;gt;
 
 # setup WildFly
 COPY wildfly-8.2.0.Final /opt/wildfly
