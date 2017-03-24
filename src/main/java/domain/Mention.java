@@ -47,4 +47,12 @@ public class Mention {
     public void setCount(int count) {
         this.count = count;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
