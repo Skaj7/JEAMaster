@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>User List</title>
+    </head>
+    <body>
+        <f:view>
+            <h1>User List</h1>
+            <h:form>
+              <h:commandButton action="#{user.startCreate}" value="Create"/>
+
+              <h:dataTable value='#{user.allEntities}' var='item' border="1" cellpadding="2" cellspacing="0">
+                                                       <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="id"/>
+                      </f:facet>
+                      <h:outputText value="#{item.id}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="email"/>
+                      </f:facet>
+                      <h:outputText value="#{item.email}"/>
+                  </h:column>
+                                                                                                                                                                              <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="username"/>
+                      </f:facet>
+                      <h:outputText value="#{item.username}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="picture"/>
+                      </f:facet>
+                      <h:outputText value="#{item.picture}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="bio"/>
+                      </f:facet>
+                      <h:outputText value="#{item.bio}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="lat"/>
+                      </f:facet>
+                      <h:outputText value="#{item.lat}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="lng"/>
+                      </f:facet>
+                      <h:outputText value="#{item.lng}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="site"/>
+                      </f:facet>
+                      <h:outputText value="#{item.site}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="password"/>
+                      </f:facet>
+                      <h:outputText value="#{item.password}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="role"/>
+                      </f:facet>
+                      <h:outputText value="#{item.role}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="createdAt"/>
+                      </f:facet>
+                      <h:outputText value="#{item.createdAt}"/>
+                  </h:column>
+                                                                        <h:column>
+                      <f:facet name="header">
+                      <h:outputText value="updatedAt"/>
+                      </f:facet>
+                      <h:outputText value="#{item.updatedAt}"/>
+                  </h:column>
+                                                   <h:column>
+                      <h:commandButton value="View" action="#{user.startView}">
+                          <f:param name="id" value="#{item.id}"/>
+                      </h:commandButton>&nbsp;
+                      <h:commandButton value="Edit" action="#{user.startEdit}">
+                          <f:param name="id" value="#{item.id}"/>
+                      </h:commandButton>&nbsp;
+                      <h:commandButton value="Delete" action="#{user.delete}">
+                          <f:param name="id" value="#{item.id}"/>
+                      </h:commandButton>
+                  </h:column>
+              </h:dataTable>
+            </h:form>
+        </f:view>
+    </body>
+</html>

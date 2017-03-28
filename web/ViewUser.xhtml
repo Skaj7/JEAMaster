@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>User View</title>
+    </head>
+    <body>
+        <f:view>
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            <h1>User View</h1>
+            <h:form>
+                <h:panelGrid columns="2">
+                                                           <h:outputText value="id:"/>
+                                                   <h:outputText value="#{user.entity.id}" title="id" />
+                                                                                                       <h:outputText value="email:"/>
+                                                   <h:outputText value="#{user.entity.email}" title="email" />
+                                                                                
+                                                        
+                                                        
+                                                                               <h:outputText value="username:"/>
+                                                   <h:outputText value="#{user.entity.username}" title="username" />
+                                                                                                       <h:outputText value="picture:"/>
+                                                   <h:outputText value="#{user.entity.picture}" title="picture" />
+                                                                                                       <h:outputText value="bio:"/>
+                                                   <h:outputText value="#{user.entity.bio}" title="bio" />
+                                                                                                       <h:outputText value="lat:"/>
+                                                   <h:outputText value="#{user.entity.lat}" title="lat" />
+                                                                                                       <h:outputText value="lng:"/>
+                                                   <h:outputText value="#{user.entity.lng}" title="lng" />
+                                                                                                       <h:outputText value="site:"/>
+                                                   <h:outputText value="#{user.entity.site}" title="site" />
+                                                                                                       <h:outputText value="password:"/>
+                                                   <h:outputText value="#{user.entity.password}" title="password" />
+                                                                                                       <h:outputText value="role:"/>
+                                                   <h:outputText value="#{user.entity.role}" title="role" />
+                                                                                                       <h:outputText value="createdAt:"/>
+                                                   <h:outputText value="#{user.entity.createdAt}" title="createdAt" />
+                                                                                                       <h:outputText value="updatedAt:"/>
+                                                   <h:outputText value="#{user.entity.updatedAt}" title="updatedAt" />
+                                                                            </h:panelGrid>
+
+                <h:commandButton action="editUser" value="Edit" />
+
+                <h:commandButton action="userList" value="Show All"/>
+
+            </h:form>
+        </f:view>
+    </body>
+</html>
