@@ -8,7 +8,9 @@ import java.util.List;
  * Created by Kaj Suiker on 11-3-2017.
  */
 @Entity
-@NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following")
+@NamedQueries({@NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following"),
+@NamedQuery(name = "User.email", query = "SELECT u FROM User as u WHERE u.email = :email")})
+
 public class User {
 
     @Id
@@ -35,20 +37,36 @@ public class User {
     private String site;
     private String password;
     private int role;
-    public Date createdAt;
+    private Date createdAt;
     public Date updatedAt;
 
     public User() {
     }
 
     @PrePersist
-    void createdAt() {
+    public void createdAt() {
         this.createdAt = this.updatedAt = new Date();
     }
 
     @PreUpdate
-    void updatedAt() {
+    public void updatedAt() {
         this.updatedAt = new Date();
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public List<User> getFollowing() {

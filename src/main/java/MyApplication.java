@@ -3,6 +3,7 @@
  */
 
 import rest.TweetRest;
+import rest.UserRest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -19,6 +20,7 @@ public class MyApplication extends Application{
         Set<Class<?>> resources = new HashSet<>();
         addRestResourceClasses(resources);
         resources.add(TweetRest.class);
+        resources.add(UserRest.class);
         // Add Jackson feature.
         resources.add(org.glassfish.jersey.jackson.JacksonFeature.class);
 

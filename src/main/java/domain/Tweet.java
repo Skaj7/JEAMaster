@@ -24,8 +24,8 @@ public class Tweet {
     private User ownerTweet;
 
     private String message;
-    public Date createdAt;
-    public Date updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Tweet(String mes){
         message = mes;
@@ -35,12 +35,12 @@ public class Tweet {
     }
 
     @PrePersist
-    void createdAt() {
+    public void createdAt() {
         this.createdAt = this.updatedAt = new Date();
     }
 
     @PreUpdate
-    void updatedAt() {
+    public void updatedAt() {
         this.updatedAt = new Date();
     }
 
@@ -50,6 +50,22 @@ public class Tweet {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public List<Heart> getHearts() {

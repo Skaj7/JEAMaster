@@ -31,6 +31,12 @@ public class TweetService {
     public TweetService() {
     }
 
+    /**
+     * post a tweet
+     * @param message
+     * @param userId
+     * @return
+     */
     public Tweet post(String message, int userId) {
         if (message == "")
             throw new NullPointerException("Message not found");
@@ -43,17 +49,27 @@ public class TweetService {
         Tweet tweet = new Tweet();
         tweet.setMessage(message);
         tweet.setOwnerTweet(user);
+        List<Tweet> tweets = user.getTweets();
+        tweets.add(tweet);
+        user.setTweets(tweets);
+        userDAO.Edit(user);
+
         tweetDAO.Save(tweet);
         return tweet;
     }
 
-    public void heart(int userId, int tweetid) {
+    /**
+     * heart a tweet
+     * @param userId
+     * @param tweetId
+     */
+    public void heart(int userId, int tweetId) {
         User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
 
-        Tweet tweet = tweetDAO.Find(tweetid);
+        Tweet tweet = tweetDAO.Find(tweetId);
 
         if (tweet == null)
             throw new NullPointerException("tweet id not found");
@@ -62,16 +78,33 @@ public class TweetService {
         heart.setOwnerHeart(user);
         heart.setTweetHeart(tweet);
 
+        List<Heart> hearts = user.getHearts();
+        hearts.add(heart);
+        user.setHearts(hearts);
+
+        hearts = tweet.getHearts();
+        hearts.add(heart);
+        user.setHearts(hearts);
+
+        userDAO.Edit(user);
+        tweetDAO.Edit(tweet);
+
         heartDAO.Save(heart);
     }
 
+    /**
+     * get latest tweet user
+     * @param userId
+     * @return
+     */
     public List<Tweet> latest(int userId) {
         User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
 
-        return tweetDAO.Latest(user);
+        List<Tweet> tweets = user.getTweets();
+        return tweets;
     }
 
     /**
@@ -90,11 +123,41 @@ public class TweetService {
         return tweetDAO.GetTimeLines(following);
     }
 
-    public List<Tweet> search() {
-        return null;
+    /**
+     * delete own tweet
+     * @param tweetId
+     * @param userId
+     */
+    public void selfDelete(int tweetId, int userId) {
+        Tweet tweet = tweetDAO.Find(tweetId);
+
+        if (tweet == null)
+            throw new NullPointerException("User id not found");
+        if (tweet.getOwnerTweet().getId() != userId){
+            throw new NullPointerException("No privilege");
+        }
+
+        tweetDAO.Delete(tweet);
     }
 
-    public List<Tweet> selfDelete() {
+    /**
+     * edit own tweet
+     * @param tweetId
+     * @param userId
+     */
+    public void edit(int tweetId, int userId) {
+        Tweet tweet = tweetDAO.Find(tweetId);
+
+        if (tweet == null)
+            throw new NullPointerException("User id not found");
+        if (tweet.getOwnerTweet().getId() != userId){
+            throw new NullPointerException("No privilege");
+        }
+
+        tweetDAO.Edit(tweet);
+    }
+
+    public List<Tweet> search() {
         return null;
     }
 
@@ -102,7 +165,4 @@ public class TweetService {
         return null;
     }
 
-    public List<Tweet> edit() {
-        return null;
-    }
 }

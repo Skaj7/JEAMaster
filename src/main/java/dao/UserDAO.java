@@ -46,4 +46,13 @@ public class UserDAO {
     public void Save(User user){
         em.persist(user);
     }
+
+    public boolean Find(String email) {
+        List<User> users = em.createNamedQuery("User.email").setParameter("email", email).getResultList();
+        if (users.isEmpty()){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
