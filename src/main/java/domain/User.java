@@ -38,7 +38,7 @@ public class User {
     private String password;
     private int role;
     private Date createdAt;
-    public Date updatedAt;
+    private Date updatedAt;
 
     public User() {
     }

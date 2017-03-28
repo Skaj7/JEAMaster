@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Edit User</title>
+    </head>
+    <body>
+        <f:view>
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            <h1>Edit User</h1>
+            <h:form>
+                <h:panelGrid columns="2">
+                                    <h:outputText value="id:"/>
+                                                                        <h:inputText value="#{user.entity.id}" title="id" />
+                                                                                <h:outputText value="email:"/>
+                                                                        <h:inputText value="#{user.entity.email}" title="email" />
+                                                                                <h:outputText value="following:"/>
+                    
+                                                        <h:outputText value="hearts:"/>
+                    
+                                                        <h:outputText value="tweets:"/>
+                    
+                                                        <h:outputText value="username:"/>
+                                                                        <h:inputText value="#{user.entity.username}" title="username" />
+                                                                                <h:outputText value="picture:"/>
+                                                                        <h:inputText value="#{user.entity.picture}" title="picture" />
+                                                                                <h:outputText value="bio:"/>
+                                                                        <h:inputText value="#{user.entity.bio}" title="bio" />
+                                                                                <h:outputText value="lat:"/>
+                                                                        <h:inputText value="#{user.entity.lat}" title="lat" />
+                                                                                <h:outputText value="lng:"/>
+                                                                        <h:inputText value="#{user.entity.lng}" title="lng" />
+                                                                                <h:outputText value="site:"/>
+                                                                        <h:inputText value="#{user.entity.site}" title="site" />
+                                                                                <h:outputText value="password:"/>
+                                                                        <h:inputText value="#{user.entity.password}" title="password" />
+                                                                                <h:outputText value="role:"/>
+                                                                        <h:inputText value="#{user.entity.role}" title="role" />
+                                                                                <h:outputText value="createdAt:"/>
+                                                                        <h:inputText value="#{user.entity.createdAt}" title="createdAt" />
+                                                                                <h:outputText value="updatedAt:"/>
+                                                                        <h:inputText value="#{user.entity.updatedAt}" title="updatedAt" />
+                                                                            </h:panelGrid>
+
+                <h:commandButton action="#{user.save}" value="Save"/>
+                <h:commandButton action="userList" value="Cancel"/>
+
+            </h:form>
+        </f:view>
+    </body>
+</html>

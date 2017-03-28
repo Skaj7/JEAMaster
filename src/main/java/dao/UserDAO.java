@@ -45,6 +45,7 @@ public class UserDAO {
 
     public void Save(User user){
         em.persist(user);
+        em.flush();
     }
 
     public boolean Find(String email) {

@@ -40,6 +40,10 @@ public class UserService {
         return user;
     }
 
+    public void save(User user) {
+        userDAO.Save(user);
+    }
+
     private boolean emailExists(String email){
         return userDAO.Find(email);
     }
