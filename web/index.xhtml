@@ -1,12 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-        #{CoffeeBean.test}
-    </f:view>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Title</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="150" header="Top" resizable="false" closable="false" collapsible="false">
+                <h:form>
+                    <ui:include src="header.xhtml" />
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="false" collapsible="true">
+                <h:outputText value="South unit content." />
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="400" header="Left" resizable="true" closable="true" collapsible="true">
+                <h:form>
+                    <ui:include src="sidebar.xhtml" />
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="content">Put default content here, if any.</ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
 </html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+      <!--xmlns:h="http://xmlns.jcp.org/jsf/html"-->
+      <!--xmlns:ui="http://xmlns.jcp.org/jsf/facelets"-->
+      <!--xmlns:f="http://xmlns.jcp.org/jsf/core"-->
+      <!--xmlns:p="http://primefaces.org/ui">-->
+<!--<h:body>-->
+    <!--<p:layout style="min-width:400px;min-height:200px;">-->
+        <!--<p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">-->
+            <!--<ui:insert name="leftnav">-->
+                <!--<ui:include src="sidebar.xhtml" />-->
+            <!--</ui:insert>-->
+        <!--</p:layoutUnit>-->
+
+        <!--<p:layoutUnit position="center">-->
+            <!--Center-->
+        <!--</p:layoutUnit>-->
+    <!--</p:layout>-->
+
+
+    <!--&lt;!&ndash;<div id="page">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id="header-container">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div id="header">&ndash;&gt;-->
+                <!--&lt;!&ndash;<ui:insert name="header">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<ui:include src="header.xhtml" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</ui:insert>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id="content-container">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div id="sidebar">&ndash;&gt;-->
+                <!--&lt;!&ndash;<ui:insert name="leftnav">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<ui:include src="sidebar.xhtml" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</ui:insert>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div id="content">&ndash;&gt;-->
+                <!--&lt;!&ndash;<ui:insert name="content">&ndash;&gt;-->
+                    <!--&lt;!&ndash;Main content&ndash;&gt;-->
+                <!--&lt;!&ndash;</ui:insert>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</h:body>-->
+<!--</html>-->
