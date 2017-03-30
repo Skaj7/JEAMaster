@@ -1,4 +1,4 @@
-package jsf;
+package jsf.old;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,22 +13,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import domain.Tweet;
+import domain.Heart;
 
 /**
  * Created by Kaj Suiker on 21-3-2017.
  */
-public class TweetManagedBean {
-    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Tweet AS o";
+public class HeartManagedBean {
+    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Heart AS o";
 
-    private Tweet myEntity;
+    private Heart myEntity;
 
     private EntityManagerFactory myEntityManagerFactory;
 
     private ListDataModel myList;
     private ListDataModel myReferencesEntities; // M-N and M-1 references
 
-    public TweetManagedBean() {
+    public HeartManagedBean() {
         myEntityManagerFactory = Persistence.createEntityManagerFactory("FirstApp");
     }
 
@@ -36,15 +36,15 @@ public class TweetManagedBean {
         return myEntityManagerFactory;
     }
 
-    public Tweet getEntity() {
+    public Heart getEntity() {
         return myEntity;
     }
 
-    public void setEntity(Tweet entity) {
+    public void setEntity(Heart entity) {
         myEntity = entity;
     }
 
-    // add new Tweet
+    // add new Heart
     public String create() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -59,10 +59,10 @@ public class TweetManagedBean {
         }
         entityManager.close();
 
-        return "tweetList";
+        return "heartList";
     }
 
-    // save edited Tweet
+    // save edited Heart
     public String save() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -76,15 +76,15 @@ public class TweetManagedBean {
             }
         }
         entityManager.close();
-        return "tweetList";
+        return "heartList";
     }
 
-    // delete Tweet
+    // delete Heart
     public String delete() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            Tweet entity = getCurrentEntity();
+            Heart entity = getCurrentEntity();
             entity = entityManager.merge(entity);
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
@@ -96,43 +96,43 @@ public class TweetManagedBean {
         }
         entityManager.close();
 
-        return "tweetList";
+        return "heartList";
     }
 
     public DataModel getReferencedEntities() {
         return myReferencesEntities;
     }
 
-    public void setReferencedEntities(Collection<Tweet> entities) {
-        myReferencesEntities = new ListDataModel(new ArrayList<Tweet>(entities));
+    public void setReferencedEntities(Collection<Heart> entities) {
+        myReferencesEntities = new ListDataModel(new ArrayList<Heart>(entities));
     }
 
     public String startCreate() {
-        myEntity = new Tweet();
-        return "createTweet";
+        myEntity = new Heart();
+        return "createHeart";
     }
 
     public String startView() {
         setEntityFromRequestParam();
-        return "viewTweet";
+        return "viewHeart";
     }
 
     public String startEdit() {
         setEntityFromRequestParam();
-        return "editTweet";
+        return "editHeart";
     }
 
-    public Tweet getCurrentEntity() {
-        Tweet entity = getEntityFromRequestParam();
+    public Heart getCurrentEntity() {
+        Heart entity = getEntityFromRequestParam();
 
         return entity == null ? myEntity : entity;
     }
 
-    public Tweet getEntityFromRequestParam() {
+    public Heart getEntityFromRequestParam() {
         if (myList == null) return null;
 
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
-        Tweet entity = (Tweet) myList.getRowData();
+        Heart entity = (Heart) myList.getRowData();
         entity = entityManager.merge(entity);
         entityManager.close();
 
@@ -143,10 +143,10 @@ public class TweetManagedBean {
         myEntity = getCurrentEntity();
     }
 
-    public Tweet findEntity(Long id) {
+    public Heart findEntity(long id) {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        Tweet entity = entityManager.find(Tweet.class, id);
+        Heart entity = entityManager.find(Heart.class, id);
 
         entityManager.close();
 
@@ -160,19 +160,19 @@ public class TweetManagedBean {
     }
 
     public SelectItem[] getAllEntitiesAsSelectedItems() {
-        List<Tweet> entities = getEntities();
+        List<Heart> entities = getEntities();
         SelectItem selectItems[] = new SelectItem[entities.size()];
         int i = 0;
-        for (Tweet entity : entities) {
+        for (Heart entity : entities) {
             selectItems[i++] = new SelectItem(entity);
         }
         return selectItems;
     }
 
-    public List<Tweet> getEntities() {
+    public List<Heart> getEntities() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        List<Tweet> entities = (List<Tweet>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
+        List<Heart> entities = (List<Heart>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
 
         entityManager.close();
 

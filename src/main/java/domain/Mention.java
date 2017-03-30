@@ -16,7 +16,7 @@ public class Mention {
     @Column(unique=true)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="mentions")
     private List<Tweet> tweets;
 
     private int count;

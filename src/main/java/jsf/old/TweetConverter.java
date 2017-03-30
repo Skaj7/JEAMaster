@@ -1,14 +1,14 @@
-package jsf;
+package jsf.old;
 
 import javax.faces.convert.Converter;
 import javax.faces.context.FacesContext;
 import javax.faces.component.UIComponent;
 
-import domain.Mention;
+import domain.Tweet;
 
-public class MentionConverter implements Converter {
+public class TweetConverter implements Converter {
 
-    public MentionConverter() {
+    public TweetConverter() {
     }
 
     public Object getAsObject(FacesContext facesContext, UIComponent uIComponent, String string) {
@@ -16,10 +16,10 @@ public class MentionConverter implements Converter {
             return null;
         }
 
-        MentionManagedBean managedBean = (MentionManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
-                facesContext, "mention");
+        TweetManagedBean managedBean = (TweetManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
+                facesContext, "tweet");
 
-        final long id = Long.parseLong(string);
+        final Long id = new Long(string);
 
         return managedBean.findEntity(id);
     }
@@ -27,14 +27,14 @@ public class MentionConverter implements Converter {
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
         if (object == null) return null;
 
-        if (object instanceof Mention) {
-            Mention entity = (Mention) object;
+        if (object instanceof Tweet) {
+            Tweet entity = (Tweet) object;
 
             final String pk = String.valueOf(entity.getId());
 
             return pk;
         } else {
-            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: Mention");
+            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: Tweet");
         }
     }
 }

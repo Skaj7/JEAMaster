@@ -8,9 +8,11 @@ import java.util.List;
  * Created by Kaj Suiker on 11-3-2017.
  */
 @Entity
-@NamedQueries({@NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following"),
-@NamedQuery(name = "User.email", query = "SELECT u FROM User as u WHERE u.email = :email")})
-
+@NamedQueries({
+    @NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following"),
+    @NamedQuery(name = "User.email", query = "SELECT u FROM User as u WHERE u.email = :email"),
+    @NamedQuery(name = "User.login", query = "SELECT u FROM User as u WHERE u.username = :username AND u.password = :password")
+})
 public class User {
 
     @Id
@@ -29,7 +31,9 @@ public class User {
     @OneToMany(mappedBy="ownerTweet")
     private List<Tweet> tweets;
 
+    @Column(unique=true)
     private String username;
+
     private byte[] picture;
     private String bio;
     private Double lat;

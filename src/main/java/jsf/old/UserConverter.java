@@ -1,14 +1,14 @@
-package jsf;
+package jsf.old;
 
 import javax.faces.convert.Converter;
 import javax.faces.context.FacesContext;
 import javax.faces.component.UIComponent;
 
-import domain.Heart;
+import domain.User;
 
-public class HeartConverter implements Converter {
+public class UserConverter implements Converter {
 
-    public HeartConverter() {
+    public UserConverter() {
     }
 
     public Object getAsObject(FacesContext facesContext, UIComponent uIComponent, String string) {
@@ -16,10 +16,10 @@ public class HeartConverter implements Converter {
             return null;
         }
 
-        HeartManagedBean managedBean = (HeartManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
-                facesContext, "heart");
+        UserManagedBean managedBean = (UserManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
+                facesContext, "user");
 
-        final long id = Long.parseLong(string);
+        final Long id = new Long(string);
 
         return managedBean.findEntity(id);
     }
@@ -27,14 +27,14 @@ public class HeartConverter implements Converter {
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
         if (object == null) return null;
 
-        if (object instanceof Heart) {
-            Heart entity = (Heart) object;
+        if (object instanceof User) {
+            User entity = (User) object;
 
             final String pk = String.valueOf(entity.getId());
 
             return pk;
         } else {
-            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: Heart");
+            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: User");
         }
     }
 }

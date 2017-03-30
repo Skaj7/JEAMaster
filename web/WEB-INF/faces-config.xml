@@ -5,38 +5,38 @@
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <converter>
         <converter-for-class>domain.Tweet</converter-for-class>
-        <converter-class>jsf.TweetConverter</converter-class>
+        <converter-class>jsf.old.TweetConverter</converter-class>
     </converter>
     <converter>
         <converter-for-class>domain.User</converter-for-class>
-        <converter-class>jsf.UserConverter</converter-class>
+        <converter-class>jsf.old.UserConverter</converter-class>
     </converter>
     <converter>
         <converter-for-class>domain.Heart</converter-for-class>
-        <converter-class>jsf.HeartConverter</converter-class>
+        <converter-class>jsf.old.HeartConverter</converter-class>
     </converter>
     <converter>
         <converter-for-class>domain.Mention</converter-for-class>
-        <converter-class>jsf.MentionConverter</converter-class>
+        <converter-class>jsf.old.MentionConverter</converter-class>
     </converter>
     <managed-bean>
         <managed-bean-name>tweet</managed-bean-name>
-        <managed-bean-class>jsf.TweetManagedBean</managed-bean-class>
+        <managed-bean-class>jsf.old.TweetManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>user</managed-bean-name>
-        <managed-bean-class>jsf.UserManagedBean</managed-bean-class>
+        <managed-bean-class>jsf.old.UserManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>heart</managed-bean-name>
-        <managed-bean-class>jsf.HeartManagedBean</managed-bean-class>
+        <managed-bean-class>jsf.old.HeartManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>mention</managed-bean-name>
-        <managed-bean-class>jsf.MentionManagedBean</managed-bean-class>
+        <managed-bean-class>jsf.old.MentionManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
@@ -44,67 +44,67 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>editTweet</from-outcome>
-            <to-view-id>/EditTweet.xhtml</to-view-id>
+            <to-view-id>/old/EditTweet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>viewTweet</from-outcome>
-            <to-view-id>/ViewTweet.xhtml</to-view-id>
+            <to-view-id>/old/ViewTweet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>tweetList</from-outcome>
-            <to-view-id>/ListTweet.xhtml</to-view-id>
+            <to-view-id>/old/ListTweet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>createTweet</from-outcome>
-            <to-view-id>/CreateTweet.xhtml</to-view-id>
+            <to-view-id>/old/CreateTweet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>editUser</from-outcome>
-            <to-view-id>/EditUser.xhtml</to-view-id>
+            <to-view-id>/old/EditUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>viewUser</from-outcome>
-            <to-view-id>/ViewUser.xhtml</to-view-id>
+            <to-view-id>/old/ViewUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>userList</from-outcome>
-            <to-view-id>/ListUser.xhtml</to-view-id>
+            <to-view-id>/old/ListUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>createUser</from-outcome>
-            <to-view-id>/CreateUser.xhtml</to-view-id>
+            <to-view-id>/old/CreateUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>editHeart</from-outcome>
-            <to-view-id>/EditHeart.xhtml</to-view-id>
+            <to-view-id>/old/EditHeart.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>viewHeart</from-outcome>
-            <to-view-id>/ViewHeart.xhtml</to-view-id>
+            <to-view-id>/old/ViewHeart.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>heartList</from-outcome>
-            <to-view-id>/ListHeart.xhtml</to-view-id>
+            <to-view-id>/old/ListHeart.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>createHeart</from-outcome>
-            <to-view-id>/CreateHeart.xhtml</to-view-id>
+            <to-view-id>/old/CreateHeart.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>editMention</from-outcome>
-            <to-view-id>/EditMention.xhtml</to-view-id>
+            <to-view-id>/old/EditMention.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>viewMention</from-outcome>
-            <to-view-id>/ViewMention.xhtml</to-view-id>
+            <to-view-id>/old/ViewMention.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>mentionList</from-outcome>
-            <to-view-id>/ListMention.xhtml</to-view-id>
+            <to-view-id>/old/ListMention.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>createMention</from-outcome>
-            <to-view-id>/CreateMention.xhtml</to-view-id>
+            <to-view-id>/old/CreateMention.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

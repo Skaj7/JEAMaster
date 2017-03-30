@@ -1,4 +1,4 @@
-package jsf;
+package jsf.old;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,22 +13,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import domain.Mention;
+import domain.Tweet;
 
 /**
  * Created by Kaj Suiker on 21-3-2017.
  */
-public class MentionManagedBean {
-    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Mention AS o";
+public class TweetManagedBean {
+    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Tweet AS o";
 
-    private Mention myEntity;
+    private Tweet myEntity;
 
     private EntityManagerFactory myEntityManagerFactory;
 
     private ListDataModel myList;
     private ListDataModel myReferencesEntities; // M-N and M-1 references
 
-    public MentionManagedBean() {
+    public TweetManagedBean() {
         myEntityManagerFactory = Persistence.createEntityManagerFactory("FirstApp");
     }
 
@@ -36,15 +36,15 @@ public class MentionManagedBean {
         return myEntityManagerFactory;
     }
 
-    public Mention getEntity() {
+    public Tweet getEntity() {
         return myEntity;
     }
 
-    public void setEntity(Mention entity) {
+    public void setEntity(Tweet entity) {
         myEntity = entity;
     }
 
-    // add new Mention
+    // add new Tweet
     public String create() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -59,10 +59,10 @@ public class MentionManagedBean {
         }
         entityManager.close();
 
-        return "mentionList";
+        return "tweetList";
     }
 
-    // save edited Mention
+    // save edited Tweet
     public String save() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -76,15 +76,15 @@ public class MentionManagedBean {
             }
         }
         entityManager.close();
-        return "mentionList";
+        return "tweetList";
     }
 
-    // delete Mention
+    // delete Tweet
     public String delete() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            Mention entity = getCurrentEntity();
+            Tweet entity = getCurrentEntity();
             entity = entityManager.merge(entity);
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
@@ -96,43 +96,43 @@ public class MentionManagedBean {
         }
         entityManager.close();
 
-        return "mentionList";
+        return "tweetList";
     }
 
     public DataModel getReferencedEntities() {
         return myReferencesEntities;
     }
 
-    public void setReferencedEntities(Collection<Mention> entities) {
-        myReferencesEntities = new ListDataModel(new ArrayList<Mention>(entities));
+    public void setReferencedEntities(Collection<Tweet> entities) {
+        myReferencesEntities = new ListDataModel(new ArrayList<Tweet>(entities));
     }
 
     public String startCreate() {
-        myEntity = new Mention();
-        return "createMention";
+        myEntity = new Tweet();
+        return "createTweet";
     }
 
     public String startView() {
         setEntityFromRequestParam();
-        return "viewMention";
+        return "viewTweet";
     }
 
     public String startEdit() {
         setEntityFromRequestParam();
-        return "editMention";
+        return "editTweet";
     }
 
-    public Mention getCurrentEntity() {
-        Mention entity = getEntityFromRequestParam();
+    public Tweet getCurrentEntity() {
+        Tweet entity = getEntityFromRequestParam();
 
         return entity == null ? myEntity : entity;
     }
 
-    public Mention getEntityFromRequestParam() {
+    public Tweet getEntityFromRequestParam() {
         if (myList == null) return null;
 
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
-        Mention entity = (Mention) myList.getRowData();
+        Tweet entity = (Tweet) myList.getRowData();
         entity = entityManager.merge(entity);
         entityManager.close();
 
@@ -143,10 +143,10 @@ public class MentionManagedBean {
         myEntity = getCurrentEntity();
     }
 
-    public Mention findEntity(long id) {
+    public Tweet findEntity(Long id) {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        Mention entity = entityManager.find(Mention.class, id);
+        Tweet entity = entityManager.find(Tweet.class, id);
 
         entityManager.close();
 
@@ -160,19 +160,19 @@ public class MentionManagedBean {
     }
 
     public SelectItem[] getAllEntitiesAsSelectedItems() {
-        List<Mention> entities = getEntities();
+        List<Tweet> entities = getEntities();
         SelectItem selectItems[] = new SelectItem[entities.size()];
         int i = 0;
-        for (Mention entity : entities) {
+        for (Tweet entity : entities) {
             selectItems[i++] = new SelectItem(entity);
         }
         return selectItems;
     }
 
-    public List<Mention> getEntities() {
+    public List<Tweet> getEntities() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        List<Mention> entities = (List<Mention>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
+        List<Tweet> entities = (List<Tweet>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
 
         entityManager.close();
 

@@ -56,4 +56,9 @@ public class UserDAO {
             return true;
         }
     }
+
+    public User login(String username, String password) {
+        User user = (User)em.createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getSingleResult();
+        return user;
+    }
 }

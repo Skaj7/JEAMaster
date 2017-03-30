@@ -1,14 +1,14 @@
-package jsf;
+package jsf.old;
 
 import javax.faces.convert.Converter;
 import javax.faces.context.FacesContext;
 import javax.faces.component.UIComponent;
 
-import domain.Tweet;
+import domain.Heart;
 
-public class TweetConverter implements Converter {
+public class HeartConverter implements Converter {
 
-    public TweetConverter() {
+    public HeartConverter() {
     }
 
     public Object getAsObject(FacesContext facesContext, UIComponent uIComponent, String string) {
@@ -16,10 +16,10 @@ public class TweetConverter implements Converter {
             return null;
         }
 
-        TweetManagedBean managedBean = (TweetManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
-                facesContext, "tweet");
+        HeartManagedBean managedBean = (HeartManagedBean) facesContext.getApplication().getVariableResolver().resolveVariable(
+                facesContext, "heart");
 
-        final Long id = new Long(string);
+        final long id = Long.parseLong(string);
 
         return managedBean.findEntity(id);
     }
@@ -27,14 +27,14 @@ public class TweetConverter implements Converter {
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
         if (object == null) return null;
 
-        if (object instanceof Tweet) {
-            Tweet entity = (Tweet) object;
+        if (object instanceof Heart) {
+            Heart entity = (Heart) object;
 
             final String pk = String.valueOf(entity.getId());
 
             return pk;
         } else {
-            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: Tweet");
+            throw new IllegalArgumentException("Incorrect object type: " + object.getClass().getName() + "; must be: Heart");
         }
     }
 }

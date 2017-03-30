@@ -1,4 +1,4 @@
-package jsf;
+package jsf.old;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,22 +13,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import domain.Heart;
+import domain.Mention;
 
 /**
  * Created by Kaj Suiker on 21-3-2017.
  */
-public class HeartManagedBean {
-    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Heart AS o";
+public class MentionManagedBean {
+    final public static String SELECT_ALL_ENTITIES_SQL = "SELECT o FROM Mention AS o";
 
-    private Heart myEntity;
+    private Mention myEntity;
 
     private EntityManagerFactory myEntityManagerFactory;
 
     private ListDataModel myList;
     private ListDataModel myReferencesEntities; // M-N and M-1 references
 
-    public HeartManagedBean() {
+    public MentionManagedBean() {
         myEntityManagerFactory = Persistence.createEntityManagerFactory("FirstApp");
     }
 
@@ -36,15 +36,15 @@ public class HeartManagedBean {
         return myEntityManagerFactory;
     }
 
-    public Heart getEntity() {
+    public Mention getEntity() {
         return myEntity;
     }
 
-    public void setEntity(Heart entity) {
+    public void setEntity(Mention entity) {
         myEntity = entity;
     }
 
-    // add new Heart
+    // add new Mention
     public String create() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -59,10 +59,10 @@ public class HeartManagedBean {
         }
         entityManager.close();
 
-        return "heartList";
+        return "mentionList";
     }
 
-    // save edited Heart
+    // save edited Mention
     public String save() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
@@ -76,15 +76,15 @@ public class HeartManagedBean {
             }
         }
         entityManager.close();
-        return "heartList";
+        return "mentionList";
     }
 
-    // delete Heart
+    // delete Mention
     public String delete() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            Heart entity = getCurrentEntity();
+            Mention entity = getCurrentEntity();
             entity = entityManager.merge(entity);
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
@@ -96,43 +96,43 @@ public class HeartManagedBean {
         }
         entityManager.close();
 
-        return "heartList";
+        return "mentionList";
     }
 
     public DataModel getReferencedEntities() {
         return myReferencesEntities;
     }
 
-    public void setReferencedEntities(Collection<Heart> entities) {
-        myReferencesEntities = new ListDataModel(new ArrayList<Heart>(entities));
+    public void setReferencedEntities(Collection<Mention> entities) {
+        myReferencesEntities = new ListDataModel(new ArrayList<Mention>(entities));
     }
 
     public String startCreate() {
-        myEntity = new Heart();
-        return "createHeart";
+        myEntity = new Mention();
+        return "createMention";
     }
 
     public String startView() {
         setEntityFromRequestParam();
-        return "viewHeart";
+        return "viewMention";
     }
 
     public String startEdit() {
         setEntityFromRequestParam();
-        return "editHeart";
+        return "editMention";
     }
 
-    public Heart getCurrentEntity() {
-        Heart entity = getEntityFromRequestParam();
+    public Mention getCurrentEntity() {
+        Mention entity = getEntityFromRequestParam();
 
         return entity == null ? myEntity : entity;
     }
 
-    public Heart getEntityFromRequestParam() {
+    public Mention getEntityFromRequestParam() {
         if (myList == null) return null;
 
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
-        Heart entity = (Heart) myList.getRowData();
+        Mention entity = (Mention) myList.getRowData();
         entity = entityManager.merge(entity);
         entityManager.close();
 
@@ -143,10 +143,10 @@ public class HeartManagedBean {
         myEntity = getCurrentEntity();
     }
 
-    public Heart findEntity(long id) {
+    public Mention findEntity(long id) {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        Heart entity = entityManager.find(Heart.class, id);
+        Mention entity = entityManager.find(Mention.class, id);
 
         entityManager.close();
 
@@ -160,19 +160,19 @@ public class HeartManagedBean {
     }
 
     public SelectItem[] getAllEntitiesAsSelectedItems() {
-        List<Heart> entities = getEntities();
+        List<Mention> entities = getEntities();
         SelectItem selectItems[] = new SelectItem[entities.size()];
         int i = 0;
-        for (Heart entity : entities) {
+        for (Mention entity : entities) {
             selectItems[i++] = new SelectItem(entity);
         }
         return selectItems;
     }
 
-    public List<Heart> getEntities() {
+    public List<Mention> getEntities() {
         EntityManager entityManager = getEntityManagerFactory().createEntityManager();
 
-        List<Heart> entities = (List<Heart>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
+        List<Mention> entities = (List<Mention>) entityManager.createQuery(SELECT_ALL_ENTITIES_SQL).getResultList();
 
         entityManager.close();
 
