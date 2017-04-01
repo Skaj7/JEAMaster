@@ -6,11 +6,13 @@ import dao.UserDAO;
 import domain.Heart;
 import domain.Tweet;
 import domain.User;
+import org.ocpsoft.pretty.time.PrettyTime;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +39,7 @@ public class TweetService {
      * @param userId
      * @return
      */
-    public Tweet post(String message, int userId) {
+    public Tweet post(String message, long userId) {
         if (message == "")
             throw new NullPointerException("Message not found");
 
@@ -112,13 +114,15 @@ public class TweetService {
      * @param userId of user
      * @return list of tweets for the timeline
      */
-    public List<Tweet> timeline(int userId) {
+    public List<Tweet> timeline(long userId) {
         User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
 
-        List<User> following = user.getFollowing();
+        List<User> following = new ArrayList<>();
+        following.addAll(user.getFollowing());
+        following.add(user);
 
         return tweetDAO.GetTimeLines(following);
     }

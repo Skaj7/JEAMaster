@@ -1,4 +1,5 @@
 import dao.UserDAO;
+import domain.Tweet;
 import domain.User;
 
 import javax.annotation.PostConstruct;
@@ -18,11 +19,12 @@ public class init {
 
     @PostConstruct
     public void init(){
-        User user = new User();
-        user.setUsername("Kaj");
-        user.setPassword("aapje");
-        user.setEmail("kaj@mail.com");
 
-        //userDAO.Save(user);
+//        User user = new User();
+//        user.setUsername("New");
+//        user.setPassword("aap");
+//        user.setEmail("kaj@mai.com");
+//
+//        userDAO.Save(user);
     }
 }

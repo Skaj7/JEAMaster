@@ -6,6 +6,7 @@ import domain.User;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.security.auth.login.FailedLoginException;
+import java.util.List;
 
 /**
  * Created by Kaj Suiker on 12-3-2017.
@@ -50,11 +51,24 @@ public class UserService {
     }
 
     public User login(String username, String password) throws FailedLoginException {
-        User user = userDAO.login(username, password);
+        if(username == null)
+            return null;
+        if(password == null)
+            return null;
 
-        if(user == null)
+        List<User> user = userDAO.login(username, password);
+
+        if(user.size() == 0)
             throw new FailedLoginException("wrong username or password");
 
-        return user;
+        return user.get(0);
+    }
+
+    public List<User> search(String username) {
+        if(username == null){
+            return null;
+        }
+
+        return userDAO.search(username);
     }
 }

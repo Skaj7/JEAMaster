@@ -4,18 +4,19 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
-
     <div style="float: left; width: 300px;">
         <h2>Welkom, #{loginBean.user.username}</h2>
     </div>
     <div style="float: left; width: 300px;">
-        <h:outputText value="Search" />
-        <h:inputText id="search" value=""></h:inputText>
+        <h:form>
+            <h:outputText value="Search" />
+            <h:inputText id="search" value=""></h:inputText>
+        </h:form>
     </div>
     <div style="float: right; width: 150px;">
         <p:growl id="messages" showDetail="true"/>
         <p:menuButton value="Options">
-            <p:menuitem value="logout" actionListener="#{loginBean.logout}" update="messages" icon="ui-icon-disk"/>
+            <p:menuitem value="logout" actionListener="#{loginBean.logout()}" update="messages" icon="ui-icon-disk"/>
             <p:separator />
             <p:menuitem value="Homepage" url="profile.xhtml" icon="ui-icon-extlink"/>
         </p:menuButton>

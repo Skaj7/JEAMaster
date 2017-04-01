@@ -5,6 +5,16 @@
 
          version="3.1">
     <display-name>OrderSecurity</display-name>
+    <!-- Login filter -->
+    <!--<filter>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<filter-class>jsf.filter.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--&lt;!&ndash; Set the login filter to secure all the pages in the /secured/* path of the application  &ndash;&gt;-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<url-pattern>/secured/*</url-pattern>-->
+    <!--</filter-mapping>-->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

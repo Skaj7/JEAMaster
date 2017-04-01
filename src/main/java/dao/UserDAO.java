@@ -57,8 +57,13 @@ public class UserDAO {
         }
     }
 
-    public User login(String username, String password) {
-        User user = (User)em.createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getSingleResult();
+    public List<User> login(String username, String password) {
+        List<User> user = em.createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
         return user;
+    }
+
+    public List<User> search(String username) {
+        username = "%"+username+"%";
+        return em.createNamedQuery("User.search").setParameter("username", username).getResultList();
     }
 }

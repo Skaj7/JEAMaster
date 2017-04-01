@@ -1,5 +1,6 @@
 package domain;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "User.followers", query = "SELECT u FROM User as u WHERE :user MEMBER OF u.following"),
     @NamedQuery(name = "User.email", query = "SELECT u FROM User as u WHERE u.email = :email"),
-    @NamedQuery(name = "User.login", query = "SELECT u FROM User as u WHERE u.username = :username AND u.password = :password")
+    @NamedQuery(name = "User.login", query = "SELECT u FROM User as u WHERE u.username = :username AND u.password = :password"),
+    @NamedQuery(name = "User.search", query = "SELECT u FROM  User as u WHERE u.username LIKE :username")
 })
 public class User {
 

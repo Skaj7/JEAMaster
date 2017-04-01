@@ -1,0 +1,40 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+    <h2>What's happening?</h2>
+    <br/>
+    <h:form>
+        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="140" counterTemplate="{0} characters remaining." autoResize="false" id="message" value="#{startBean.message}"/>
+        <br/>
+        <h:outputText id="display" />
+        <br/>
+        <p:commandButton  value="Tweet" actionListener="#{startBean.tweet()}" update="test"/>
+
+        <h2>test #{startBean.test()}</h2>
+
+        <br/><br/><br/>
+
+        <p:growl id="msgs" showDetail="true" />
+        <p:tabView dynamic="true" cache="true" id="test">
+            <p:tab title="Timeline">
+                <p:dataTable var="tweet" value="#{startBean.timeline}">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{startBean.timeAgo(tweet.createdAt)}" />
+                        <!--todo time + harts  startBean.timeAgo(tweet.createdAt)-->
+                    </p:column>
+                    <p:column headerText="owner">
+                        <h:outputText value="#{tweet.ownerTweet.username}" />
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Mentions">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:outputText value="Mentions todo" />
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</ui:composition>
