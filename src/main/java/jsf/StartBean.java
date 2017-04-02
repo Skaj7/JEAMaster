@@ -4,6 +4,7 @@ import domain.Tweet;
 import domain.User;
 import org.ocpsoft.pretty.time.PrettyTime;
 import service.TweetService;
+import service.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
@@ -25,11 +26,32 @@ public class StartBean implements Serializable {
 
     @Inject
     TweetService tweetService;
+
+    @Inject
+    UserService userService;
     
     private int num = 0;
     private List<Tweet> timeline;
     private String message;
     private String search;
+    private String followUser;
+    private User follow;
+
+    public User getFollow() {
+        return follow;
+    }
+
+    public void setFollow(User follow) {
+        this.follow = follow;
+    }
+
+    public String getFollowUser() {
+        return followUser;
+    }
+
+    public void setFollowUser(String followUser) {
+        this.followUser = followUser;
+    }
 
     public String getSearch() {
         return search;
@@ -78,11 +100,8 @@ public class StartBean implements Serializable {
             return p.format(test);
     }
 
-    //public List<String> completeText(String query) {
-      //  return null;
-    //}
-
-    public String goToUser(User user){
-        return
+    public void follow(){
+        userService.follow(followUser, loginBean.getUser());
+        followUser = "";
     }
 }

@@ -37,12 +37,35 @@
 
                         <p:commandButton  value="Search" actionListener="#{searchBean.search()}" update="search"/>
 
-                        <p:dataTable var="user" value="#{searchBean.searchResult}" disabledSelection="true" id="search">
-                            <p:column headerText="User">
-                                <p:commandLink oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-                                    <f:setPropertyActionListener value="#{user}" target="#{startBean.goToUser()}" />
-                                    <h:outputText value="#{user.username}" />
-                                </p:commandLink>
+
+                        <p:dataTable var="user" value="#{searchBean.searchResult}" id="search">
+                            <p:column headerText="eer">
+
+                                <!--<p:dataTable id="singleDT" var="car" value="#{dtSelectionView.cars2}" selectionMode="single" selection="#{dtSelectionView.selectedCar}" rowKey="#{car.id}">-->
+                                    <!--<f:facet name="header">-->
+                                        <!--Single with Row Click-->
+                                    <!--</f:facet>-->
+                                    <!--<p:column headerText="Id">-->
+                                        <!--<h:outputText value="#{car.id}" />-->
+                                    <!--</p:column>-->
+                                    <!--<p:column headerText="Year">-->
+                                        <!--<h:outputText value="#{car.year}" />-->
+                                    <!--</p:column>-->
+                                    <!--<p:column headerText="Brand">-->
+                                        <!--<h:outputText value="#{car.brand}" />-->
+                                    <!--</p:column>-->
+                                    <!--<p:column headerText="Color">-->
+                                        <!--<h:outputText value="#{car.color}" />-->
+                                    <!--</p:column>-->
+                                    <!--<f:facet name="footer">-->
+                                        <!--<p:commandButton process="singleDT" update=":form:carDetail" icon="ui-icon-search" value="View" oncomplete="PF('carDialog').show()" />-->
+                                    <!--</f:facet>-->
+                                <!--</p:dataTable>-->
+
+                                <!--<f:facet name="footer">-->
+                                    <!--<p:commandButton id="selectRowBtn" value="select" action="#{startBean.follow()}"/>-->
+                                <!--</f:facet>-->
+                                <h:outputText value="#{user.id}" />
                             </p:column>
 
                             <p:column headerText="Year">
@@ -56,7 +79,28 @@
                             <p:column headerText="Color">
                                 <h:outputText value="#{user.password}" />
                             </p:column>
+
+                            <!--<f:facet name="footer">-->
+                                <!--&lt;!&ndash;<p:commandButton process="singleDT" update=":form:carDetail" icon="ui-icon-search" value="View" oncomplete="PF('carDialog').show()" actionListener="#{startBean.follow}"/>&ndash;&gt;-->
+                                <!--<p:commandButton  process="search" value="follow"  actionListener="#{startBean.test()}"/>-->
+                            <!--</f:facet>-->
                         </p:dataTable>
+
+                        <!--<h:outputText value="id: " />-->
+                        <!--<h:inputSecret id="followUser" value="#{startBean.followUser}" />-->
+
+                        <!--<h:commandButton  value="follow" action="#{startBean.follow()}">-->
+                        <!--</h:commandButton>-->
+
+                    </h:form>
+                </div>
+                <div>
+                    <h:form>
+                        <h:outputText value="id: " />
+                        <h:inputText id="followUser" value="#{startBean.followUser}" />
+
+                        <h:commandButton  value="follow" action="#{startBean.follow()}">
+                        </h:commandButton>
                     </h:form>
                 </div>
                 <ui:insert name="content">Put default content here, if any.</ui:insert>

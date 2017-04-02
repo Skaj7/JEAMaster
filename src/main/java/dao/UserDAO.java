@@ -33,6 +33,7 @@ public class UserDAO {
 
     public void Edit(User user){
         em.merge(user);
+        //em.flush();
     }
 
     public User Find(long userId){

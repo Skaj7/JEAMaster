@@ -71,4 +71,22 @@ public class UserService {
 
         return userDAO.search(username);
     }
+
+    public void follow(String followUser, User current) {
+        if (followUser == null || followUser == ""){
+            return;
+        }
+
+        User toFollow = userDAO.Find(Long.parseLong(followUser));
+
+        if(toFollow == null){
+            return;
+        }
+
+        List<User> following = current.getFollowing();
+        following.add(toFollow);
+
+        userDAO.Edit(current);
+
+    }
 }
