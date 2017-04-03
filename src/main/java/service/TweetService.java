@@ -11,9 +11,7 @@ import org.ocpsoft.pretty.time.PrettyTime;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Kaj Suiker on 12-3-2017.
@@ -35,15 +33,16 @@ public class TweetService {
 
     /**
      * post a tweet
+     * long userId
      * @param message
-     * @param userId
+     * @param user
      * @return
      */
-    public Tweet post(String message, long userId) {
+    public Tweet post(String message, User user) {
         if (message == "")
             throw new NullPointerException("Message not found");
 
-        User user = userDAO.Find(userId);
+//        User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
@@ -99,13 +98,28 @@ public class TweetService {
      * @param userId
      * @return
      */
-    public List<Tweet> latest(int userId) {
+    public List<Tweet> latest(long userId) {
         User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
 
-        List<Tweet> tweets = user.getTweets();
+        List<Tweet> tweets = new ArrayList<>();
+        tweets.addAll(user.getTweets());
+        //order by data
+        Collections.sort(tweets, new Comparator<Tweet>() {
+            public int compare(Tweet o1, Tweet o2) {
+                Date a = o1.getCreatedAt();
+                Date b = o2.getCreatedAt();
+                if (a.after(b))
+                    return -1;
+                else if (a.equals(b)) // it's equals
+                    return 0;
+                else
+                    return 1;
+            }
+        });
+
         return tweets;
     }
 

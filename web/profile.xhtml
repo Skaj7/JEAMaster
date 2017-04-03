@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Title</title>
+    #{profileBean.setProperties()}
+</h:head>
+<h:body>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="80"  resizable="false" closable="false" collapsible="false">
+            <h:form>
+                <p:commandButton style="float: right" value="Back to Start" action="/index.xhtml"/>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="east" size="50%" resizable="fasle" closable="false" collapsible="false">
+            <h:form>
+                <p:fieldset legend="Details" style="margin-bottom:20px">
+                    <h1>Name: #{profileBean.user.username}</h1>
+                    <h1>Location: #{profileBean.user.lat} + #{profileBean.user.lng}</h1>
+                    <h1>Web: #{profileBean.user.site}</h1>
+                    <h1>Bio: #{profileBean.user.bio}</h1>
+                </p:fieldset>
+                <p:fieldset legend="var" style="margin-bottom:20px">
+                    <p:commandButton value="following #{profileBean.followCount()}" action="#{profileBean.updateFollowingData()}" update="dataList"/>
+                    <p:commandButton value="followers #{profileBean.followerCount()}" action="#{profileBean.updateFollowerData()}" update="dataList"/>
+                    <p:commandButton value="tweets #{profileBean.tweetCount()}" disabled="true"/>
+                </p:fieldset>
+                <p:fieldset legend="table" style="margin-bottom:20px" id="dataList">
+                    <h:form>
+                        <p:dataGrid var="user" value="#{profileBean.data}" columns="3" layout="grid"
+                                    rows="12" paginator="true" id="dataGrid"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="6,12,16">
+                            <p:panel header="#{car.id}" style="text-align:center">
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <h:outputText value="#{user.username}"/>
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:dataGrid>
+                    </h:form>
+                </p:fieldset>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form>
+                <p:fieldset legend="Profile" style="margin-bottom:20px">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h2>Name: #{profileBean.user.username}</h2>
+
+                        <!--startBean.followUser  startBean.follow()-->
+                        <h:commandButton  value="follow" action="#{profileBean.follow()}" disabled="#{profileBean.followPos()}">
+                        </h:commandButton>
+                    </h:panelGrid>
+                </p:fieldset>
+
+                <p:fieldset legend="Tweets" style="margin-bottom:20px">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:dataTable var="tweet" value="#{profileBean.getTweets()}">
+                            <p:column headerText="time">
+                                <h:outputText value="#{startBean.timeAgo(tweet.createdAt)}" />
+                            </p:column>
+                            <p:column headerText="message">
+                                <h:outputText value="#{tweet.message}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+                </p:fieldset>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>

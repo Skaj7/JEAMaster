@@ -13,9 +13,7 @@
         <br/>
         <p:commandButton  value="Tweet" actionListener="#{startBean.tweet()}" update="test"/>
 
-        <h2>test #{startBean.test()}</h2>
-
-        <br/><br/><br/>
+        <br/><br/>
 
         <p:growl id="msgs" showDetail="true" />
         <p:tabView dynamic="true" cache="true" id="test">
@@ -23,7 +21,6 @@
                 <p:dataTable var="tweet" value="#{startBean.timeline}">
                     <p:column headerText="ID">
                         <h:outputText value="#{startBean.timeAgo(tweet.createdAt)}" />
-                        <!--todo time + harts  startBean.timeAgo(tweet.createdAt)-->
                     </p:column>
                     <p:column headerText="owner">
                         <h:outputText value="#{tweet.ownerTweet.username}" />

@@ -29,6 +29,9 @@ public class StartBean implements Serializable {
 
     @Inject
     UserService userService;
+
+    @Inject
+    ProfileBean profileBean;
     
     private int num = 0;
     private List<Tweet> timeline;
@@ -36,6 +39,25 @@ public class StartBean implements Serializable {
     private String search;
     private String followUser;
     private User follow;
+
+    private String seeUser;
+    private String tests;
+
+    public String getTests() {
+        return tests;
+    }
+
+    public void setTests(String tests) {
+        this.tests = tests;
+    }
+
+    public String getSeeUser() {
+        return seeUser;
+    }
+
+    public void setSeeUser(String seeUser) {
+        this.seeUser = seeUser;
+    }
 
     public User getFollow() {
         return follow;
@@ -75,8 +97,9 @@ public class StartBean implements Serializable {
     }
 
     public void tweet() {
-        tweetService.post(message, loginBean.getUser().getId());
+        tweetService.post(message, loginBean.getUser());//oginBean.getUser().getId());
         fillTimeline();
+        message = "";
     }
 
     public void fill(){
@@ -100,8 +123,19 @@ public class StartBean implements Serializable {
             return p.format(test);
     }
 
-    public void follow(){
-        userService.follow(followUser, loginBean.getUser());
-        followUser = "";
+    public String homePage(){
+        tests = "";
+
+        profileBean.setUser(userService.getUser(loginBean.getUser().getId().toString()));
+        return "/profile.xhtml?faces-redirect=true";
+    }
+
+    public String goTo(){
+        if(seeUser == "")
+            return null;
+
+        tests = seeUser;
+        seeUser = "";
+        return "/profile.xhtml";
     }
 }

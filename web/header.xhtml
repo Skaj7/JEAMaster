@@ -1,0 +1,59 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+
+
+    <div style="float: left; width: 10%" >
+        <h2>Welkom, #{loginBean.user.username}</h2>
+
+        <h:outputText value="id: " />
+        <h:inputText id="seeUser" value="#{startBean.seeUser}"/>
+        <h:commandButton  value="Go to" action="#{startBean.goTo()}">
+        </h:commandButton>
+    </div>
+
+
+
+
+
+    <div style="float: left; width: 80%;">
+        <h:form>
+            <h:outputText value="Search: " />
+            <h:inputText id="searchstring" value="#{searchBean.searchString}"></h:inputText>
+
+            <p:commandButton  value="Search" actionListener="#{searchBean.search()}" update="search"/>
+
+
+            <p:dataTable var="user" value="#{searchBean.searchResult}" id="search">
+                <p:column headerText="id">
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+
+                <p:column headerText="User">
+                    <h:outputText value="#{user.username}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </div>
+
+
+    <div style="float: right; width: 7%;">
+        <p:growl id="messages" showDetail="true"/>
+        <p:menuButton value="Options">
+            <p:menuitem value="logout" action="#{loginBean.logout()}" icon="ui-icon-disk"/>
+            <p:separator />
+            <p:menuitem value="homePage" icon="ui-icon-extlink" action="#{startBean.homePage()}"/>
+        </p:menuButton>
+    </div>
+
+
+</ui:composition>

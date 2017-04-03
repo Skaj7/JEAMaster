@@ -9,12 +9,15 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.auth.login.FailedLoginException;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
 
@@ -25,7 +28,7 @@ import java.net.URI;
 //@ManagedBean(name = "loginBean")
 @Named
 @SessionScoped
-public class LoginBean implements Serializable {
+public class LoginBean implements Serializable{
 
     @Inject
     private UserService userService;
@@ -33,50 +36,15 @@ public class LoginBean implements Serializable {
     @Inject
     private Credentials credentials;
 
-//    private String username;
-//    private String password;
-    private String messages;
+    @Inject
+    private StartBean startBean;
 
-    public String getMessages() {
-        return messages;
-    }
-
-    public void setMessages(String messages) {
-        this.messages = messages;
-    }
+    @Inject
+    private ProfileBean profileBean;
 
     private User user;
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-
-        public Credentials getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
+    public LoginBean() {
     }
 
     public User getUser() {
@@ -99,17 +67,11 @@ public class LoginBean implements Serializable {
         if(user == null)
             return "/login.xhtml";
 
-        return "secured/index.xhtml";
+        return "/index.xhtml";
     }
 
-    public String logout() {
-        return null;
-    }
-
-    public boolean isLoggedIn(){
-        if (user == null) {
-            return false;
-        }
-        return true;
+    public String logout() throws IOException {
+        user = null;
+        return "/login.xhtml";
     }
 }
