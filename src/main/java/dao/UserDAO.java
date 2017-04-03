@@ -33,6 +33,7 @@ public class UserDAO {
 
     public void Edit(User user){
         em.merge(user);
+        //em.flush();
     }
 
     public User Find(long userId){
@@ -55,5 +56,15 @@ public class UserDAO {
         }else {
             return true;
         }
+    }
+
+    public List<User> login(String username, String password) {
+        List<User> user = em.createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
+        return user;
+    }
+
+    public List<User> search(String username) {
+        username = "%"+username+"%";
+        return em.createNamedQuery("User.search").setParameter("username", username).getResultList();
     }
 }

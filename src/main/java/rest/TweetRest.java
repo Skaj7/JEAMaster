@@ -24,15 +24,15 @@ public class TweetRest {
     @Inject
     TweetService tweetService;
 
-    @POST
-    @Produces("application/json")
-    @Path("tweet/{userId}")
-    @Interceptors(InterceptorClass.class)
-    public Tweet post(@PathParam("userId") int id , String in){
-        Tweet tweet = tweetService.post(in, id);
-        tweet.getOwnerTweet().setTweets(null);
-        return tweet;
-    }
+//    @POST
+//    @Produces("application/json")
+//    @Path("tweet/{userId}")
+//    @Interceptors(InterceptorClass.class)
+//    public Tweet post(@PathParam("userId") int id , String in){
+//        Tweet tweet = tweetService.post(in, id);
+//        tweet.getOwnerTweet().setTweets(null);
+//        return tweet;
+//    }
 
     @POST
     @Produces("application/json")

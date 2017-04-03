@@ -28,6 +28,7 @@ public class TweetDAO {
 
     public void Save(Tweet tweet){
         em.persist(tweet);
+        em.flush();
     }
 
     public boolean Delete(Tweet tweet){

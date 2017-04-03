@@ -1,6 +1,8 @@
 package rest;
 
 import java.net.*;
+
+import com.sun.jndi.toolkit.url.Uri;
 import dao.UserDAO;
 import domain.Tweet;
 import domain.User;
@@ -37,6 +39,14 @@ public class UserRest {
 
     public UserRest() {
     }
+
+//    @POST
+//    @Path("login")
+//    public Response loginUser(User user){
+//        userService.login(user);
+//        URI uri = uriInfo.getAbsolutePathBuilder().path(user.getUsername().toString()).build();
+//        return Response.created(uri).build();
+//    }
 
 
     @POST

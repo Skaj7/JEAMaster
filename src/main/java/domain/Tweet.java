@@ -8,8 +8,9 @@ import java.util.List;
  * Created by Kaj Suiker on 10-3-2017.
  */
 @Entity
-@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t WHERE t.ownerTweet IN :following")
+@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t WHERE t.ownerTweet IN :following order by t.createdAt desc")
 public class Tweet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +18,11 @@ public class Tweet {
     @OneToMany(mappedBy = "tweetHeart")
     private List<Heart> hearts;
 
-    @ManyToMany(mappedBy="tweets")
+    @ManyToMany
+    @JoinTable(
+            name="TWEET_MEN",
+            joinColumns=@JoinColumn(name="TWEET_ID"),
+            inverseJoinColumns=@JoinColumn(name="MEN_ID"))
     private List<Mention> mentions;
 
     @ManyToOne
