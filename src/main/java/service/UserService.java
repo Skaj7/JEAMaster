@@ -85,12 +85,12 @@ public class UserService {
         userDAO.Edit(current);
     }
 
-    public User getUser(String id){
-        if (id == null || id == ""){
+    public User getUser(long id){
+        if (id == 0L){
             return null;
         }
 
-        User user = userDAO.Find(Long.parseLong(id));
+        User user = userDAO.Find(id);
 
         if(user == null){
             return null;

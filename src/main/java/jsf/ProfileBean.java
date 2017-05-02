@@ -4,6 +4,7 @@ import domain.Tweet;
 import domain.User;
 import service.TweetService;
 import service.UserService;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
@@ -76,8 +77,8 @@ public class ProfileBean implements Serializable {
             user = loginBean.getUser();
             isLogin = true;
         }else {
-            user = userService.getUser(startBean.getTests());
-            isLogin = false;
+//            user = userService.getUser(startBean.getTests());
+//            isLogin = false;
         }
 
         return null;
@@ -104,11 +105,12 @@ public class ProfileBean implements Serializable {
     }
 
     public String tweetCount(){
-        if(user.getTweets() == null || user.getTweets().isEmpty()){
-            return "0";
-        }
-
-        return Integer.toString(user.getTweets().size());
+        throw new NotImplementedException();
+//        if(user.getTweets() == null || user.getTweets().isEmpty()){
+//            return "0";
+//        }
+//
+//        return Integer.toString(user.getTweets().size());
     }
 
     public boolean followPos(){

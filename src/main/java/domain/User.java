@@ -30,8 +30,8 @@ public class User {
     @OneToMany(mappedBy = "ownerHeart")
     private List<Heart> hearts;
 
-    @OneToMany(mappedBy="ownerTweet")
-    private List<Tweet> tweets;
+//    @OneToMany//(mappedBy="ownerTweet")
+//    private List<Tweet> tweets;
 
     @Column(unique=true)
     private String username;
@@ -155,13 +155,13 @@ public class User {
         this.role = role;
     }
 
-    public List<Tweet> getTweets() {
-        return tweets;
-    }
-
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
-    }
+//    public List<Tweet> getTweets() {
+//        return tweets;
+//    }
+//
+//    public void setTweets(List<Tweet> tweets) {
+//        this.tweets = tweets;
+//    }
 
     public String getEmail() {
         return email;

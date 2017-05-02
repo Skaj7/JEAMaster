@@ -48,7 +48,7 @@ public class TweetDAO {
         return em.createNamedQuery("Tweet.all").setParameter("following", following).getResultList();
     }
 
-    public List<Tweet> Latest(User user){
-        return em.createNamedQuery("Tweet.all").setParameter("following", user).getResultList();
+    public List<Tweet> GetUserTweets(User user){
+        return em.createNamedQuery("Tweet.user").setParameter("userId", user).getResultList();
     }
 }

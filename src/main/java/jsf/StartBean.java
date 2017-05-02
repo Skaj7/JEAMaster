@@ -97,9 +97,9 @@ public class StartBean implements Serializable {
     }
 
     public void tweet() {
-        tweetService.post(message, loginBean.getUser());//oginBean.getUser().getId());
-        fillTimeline();
-        message = "";
+//        tweetService.post(message, loginBean.getUser());//oginBean.getUser().getId());
+//        fillTimeline();
+//        message = "";
     }
 
     public void fill(){
@@ -126,7 +126,7 @@ public class StartBean implements Serializable {
     public String homePage(){
         tests = "";
 
-        profileBean.setUser(userService.getUser(loginBean.getUser().getId().toString()));
+//        profileBean.setUser(userService.getUser(loginBean.getUser().getId().toString()));
         return "/profile.xhtml?faces-redirect=true";
     }
 

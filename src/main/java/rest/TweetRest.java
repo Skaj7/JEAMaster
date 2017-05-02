@@ -1,6 +1,7 @@
 package rest;
 
 import domain.Tweet;
+import domain.User;
 import interceptor.InterceptorClass;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -73,8 +74,12 @@ public class TweetRest {
 
 
 
-
-
+    @POST
+    @Produces("application/json")
+    @Path("{userId}")
+    public void post(Tweet tweet, @PathParam("userId") int id){
+        tweetService.post(tweet.getMessage(),id);
+    }
 
 
 

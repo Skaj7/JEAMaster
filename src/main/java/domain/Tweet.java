@@ -8,7 +8,10 @@ import java.util.List;
  * Created by Kaj Suiker on 10-3-2017.
  */
 @Entity
-@NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t WHERE t.ownerTweet IN :following order by t.createdAt desc")
+@NamedQueries({
+        @NamedQuery(name = "Tweet.all", query = "SELECT t FROM Tweet t WHERE t.ownerTweet IN :following order by t.createdAt desc"),
+        @NamedQuery(name = "Tweet.user", query = "SELECT t FROM Tweet t WHERE t.ownerTweet = :userId order by t.createdAt desc")
+})
 public class Tweet {
 
     @Id

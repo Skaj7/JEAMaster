@@ -35,14 +35,14 @@ public class TweetService {
      * post a tweet
      * long userId
      * @param message
-     * @param user
+     * @param
      * @return
      */
-    public Tweet post(String message, User user) {
+    public Tweet post(String message, int userId) {
         if (message == "")
             throw new NullPointerException("Message not found");
 
-//        User user = userDAO.Find(userId);
+        User user = userDAO.Find(userId);
 
         if (user == null)
             throw new NullPointerException("User id not found");
@@ -50,12 +50,11 @@ public class TweetService {
         Tweet tweet = new Tweet();
         tweet.setMessage(message);
         tweet.setOwnerTweet(user);
-        List<Tweet> tweets = user.getTweets();
-        tweets.add(tweet);
-        user.setTweets(tweets);
-        userDAO.Edit(user);
 
         tweetDAO.Save(tweet);
+        userDAO.Edit(user);
+
+
         return tweet;
     }
 
@@ -105,7 +104,7 @@ public class TweetService {
             throw new NullPointerException("User id not found");
 
         List<Tweet> tweets = new ArrayList<>();
-        tweets.addAll(user.getTweets());
+        tweets.addAll(tweetDAO.GetUserTweets(user));
         //order by data
         Collections.sort(tweets, new Comparator<Tweet>() {
             public int compare(Tweet o1, Tweet o2) {
@@ -138,7 +137,12 @@ public class TweetService {
         following.addAll(user.getFollowing());
         following.add(user);
 
-        return tweetDAO.GetTimeLines(following);
+        List<Tweet> tweets = new ArrayList<>();
+        for(User u : following){
+           todo:tweets.addAll(tweetDAO.GetUserTweets(u));
+        }
+
+        return tweets;//tweetDAO.GetTimeLines(following);
     }
 
     /**
@@ -151,9 +155,9 @@ public class TweetService {
 
         if (tweet == null)
             throw new NullPointerException("User id not found");
-        if (tweet.getOwnerTweet().getId() != userId){
-            throw new NullPointerException("No privilege");
-        }
+//        if (tweet.getOwnerTweet().getId() != userId){
+//            throw new NullPointerException("No privilege");
+//        }
 
         tweetDAO.Delete(tweet);
     }
@@ -168,9 +172,9 @@ public class TweetService {
 
         if (tweet == null)
             throw new NullPointerException("User id not found");
-        if (tweet.getOwnerTweet().getId() != userId){
-            throw new NullPointerException("No privilege");
-        }
+//        if (tweet.getOwnerTweet().getId() != userId){
+//            throw new NullPointerException("No privilege");
+//        }
 
         tweetDAO.Edit(tweet);
     }
