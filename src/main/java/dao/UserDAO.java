@@ -40,8 +40,8 @@ public class UserDAO {
         return em.find(User.class, userId);
     }
 
-    public List<User> Followers(User user){
-        return em.createNamedQuery("User.followers").setParameter("user", user).getResultList();
+    public List<User> Followers(User id){
+        return em.createNamedQuery("User.followers").setParameter("user", id).getResultList();
     }
 
     public void Save(User user){

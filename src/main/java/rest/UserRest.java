@@ -3,6 +3,7 @@ package rest;
 import java.net.*;
 
 import com.google.gson.Gson;
+//import com.sun.jndi.toolkit.url.Uri;
 import com.sun.jndi.toolkit.url.Uri;
 import dao.UserDAO;
 import domain.Tweet;
@@ -18,6 +19,7 @@ import javax.security.auth.login.FailedLoginException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,20 @@ public class UserRest {
 
     public UserRest() {
     }
+
+    @GET
+    @Produces("application/json")
+    @Path("followers/{userId}")
+    public Response followers(@PathParam("userId") int id){
+        try {
+            List<User> following = userService.followers(id);
+            URI uri = uriInfo.getBaseUriBuilder().matrixParam("test", following).build();
+//            URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(createdUser.getId())).build();
+            return Response.ok(following).location(uri).build();
+        }catch (Exception ex){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+}
 
     @POST
     @Produces("application/json")

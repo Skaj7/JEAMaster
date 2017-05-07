@@ -99,7 +99,13 @@ public class UserService {
         return user;
     }
 
-    public List<User> followers(User user) {
+    public List<User> followers(long id) throws Exception {
+        if(id == 0){
+            throw new Exception();
+        }
+
+        User user = userDAO.Find(id);
+
         if(user == null){
             return null;
         }

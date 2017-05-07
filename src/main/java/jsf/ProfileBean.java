@@ -89,7 +89,7 @@ public class ProfileBean implements Serializable {
     }
 
     public void updateFollowerData(){
-        data = userService.followers(user);
+//        data = userService.followers(user);
     }
 
     public String followCount(){
@@ -101,7 +101,8 @@ public class ProfileBean implements Serializable {
     }
 
     public String followerCount(){
-        return Integer.toString(userService.followers(user).size());
+//        return Integer.toString(userService.followers(user).size());
+        throw new NotImplementedException();
     }
 
     public String tweetCount(){

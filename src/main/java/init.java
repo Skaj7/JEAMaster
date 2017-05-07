@@ -26,25 +26,25 @@ public class init {
 
     @PostConstruct
     public void init(){
-        List<User> search = userDAO.search("Kaj");
-        if(search == null || search.isEmpty()) {
-            User user = new User();
-            user.setUsername("Kaj");
-            user.setPassword("a");
-            user.setEmail("kaj@mai.com");
-
-            userDAO.Save(user);
-            List<Tweet> tweets = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Tweet tweet = new Tweet();
-                tweet.setMessage("" + i);
-                tweet.setOwnerTweet(user);
-                tweetDAO.Save(tweet);
-                tweets.add(tweet);
-            }
-            //user.setTweets(tweets);
-            userDAO.Edit(user);
-        }
+//        List<User> search = userDAO.search("Kaj");
+//        if(search == null || search.isEmpty()) {
+//            User user = new User();
+//            user.setUsername("Kaj");
+//            user.setPassword("a");
+//            user.setEmail("kaj@mai.com");
+//
+//            userDAO.Save(user);
+//            List<Tweet> tweets = new ArrayList<>();
+//            for (int i = 0; i < 5; i++) {
+//                Tweet tweet = new Tweet();
+//                tweet.setMessage("" + i);
+//                tweet.setOwnerTweet(user);
+//                tweetDAO.Save(tweet);
+//                tweets.add(tweet);
+//            }
+//            //user.setTweets(tweets);
+//            userDAO.Edit(user);
+//        }
 //            User use = new User();
 //            use.setUsername("Sec");
 //            use.setPassword("a");
@@ -56,12 +56,12 @@ public class init {
 //            t.setOwnerTweet(use);
 //            tweetDAO.Save(t);
 
-        List<User> s = userDAO.search("Sec");
-
-        List<User> aa = new ArrayList<>();
-        aa.add(s.get(0));
-            search.get(0).setFollowing(aa);
-            userDAO.Save(search.get(0));
+//        List<User> s = userDAO.search("Sec");
+//
+//        List<User> aa = new ArrayList<>();
+//        aa.add(s.get(0));
+//            search.get(0).setFollowing(aa);
+//            userDAO.Save(search.get(0));
 //            user.setBio("geen bio");
 //            user.setSite("http");
 //            user.setTweets(tweets);
